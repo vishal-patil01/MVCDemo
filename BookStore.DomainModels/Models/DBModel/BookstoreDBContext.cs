@@ -8,9 +8,13 @@ namespace BookStore.Models.DBModel
 {
     public class BookstoreDBContext : DbContext
     {
+        public BookstoreDBContext()
+        {
+        }
+
         public BookstoreDBContext(DbContextOptions options) : base(options)
         {
         }
-        public DbSet<BookstoreDBContext> Book { get; set; }
+        public DbSet<Book> Book { get; set; }
     }
 }
