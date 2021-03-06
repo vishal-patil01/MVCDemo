@@ -1,3 +1,4 @@
+using BookStore.Models.DBModel;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace BookStore
@@ -23,6 +25,7 @@ namespace BookStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<BookstoreDBContext>(options => options.UseSqlServer("DESKTOP-EJ98MQC\\SQLEXPRESS;Initial Catalog=SingleSessionApp;Integrated Security=True"));
             services.AddControllersWithViews();
         }
 
