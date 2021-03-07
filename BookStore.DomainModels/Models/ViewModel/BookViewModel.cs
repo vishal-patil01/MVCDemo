@@ -34,6 +34,9 @@ namespace BookStore.Models.ViewModel
 
         [Required]
         [DisplayName("Cover Image")]
+        public string CoverImageUrl { get; set; }
+
+        [DisplayName("Cover Image")]
         [DataType(DataType.Upload)]
         public IFormFile CoverImage { get; set; }
     }

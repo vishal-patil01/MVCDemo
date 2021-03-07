@@ -3,7 +3,7 @@
     <h2 class="text-center">Add Book</h2>
     <div class="row">
         <div class="col-md-4 mx-auto">
-            <form asp-controller="BookStore" asp-action="AddBook" method="post">
+            <form asp-controller="BookStore" enctype="multipart/form-data" asp-action="AddBook" method="post">
                 <div class="form-group">
                     <label asp-for="Title" class="control-label"></label>
                     <input asp-for="Title" class="form-control" id="Title">

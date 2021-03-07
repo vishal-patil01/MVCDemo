@@ -17,4 +17,8 @@
     <ProjectReference Include="..\BookStore.BussinessLayer\BookStore.BussinessLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Covers\" />
+  </ItemGroup>
+
 </Project>
