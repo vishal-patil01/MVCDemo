@@ -12,7 +12,7 @@ namespace BookStore.Models.ViewModel
         public int Id { get; set; }
 
         [DataType(DataType.Text)]
-        [Required]
+        [Required(ErrorMessage ="Title Should Not Be Empty")]
         public string Title { get; set; }
 
         [DataType(DataType.MultilineText)]
@@ -25,6 +25,7 @@ namespace BookStore.Models.ViewModel
 
         [Required]
         [DisplayName("Number Of Pages")]
+        [Range(10,4000,ErrorMessage ="Value Must Be Greater Than Zero")]
         public int NumberOfPages { get; set; }
         
         [DataType(DataType.DateTime)]
