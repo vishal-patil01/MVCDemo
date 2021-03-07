@@ -26,6 +26,9 @@ namespace BookStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BookstoreDBContext>(options => options.UseSqlServer("DESKTOP-EJ98MQC\\SQLEXPRESS;Initial Catalog=SingleSessionApp;Integrated Security=True"));
+            #if DEBUG
+            services.AddRazorPages().AddRazorRuntimeCompilation();
+            #endif
             services.AddControllersWithViews();
         }
 
