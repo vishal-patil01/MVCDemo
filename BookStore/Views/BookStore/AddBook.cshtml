@@ -28,9 +28,26 @@
                     <label asp-for="CreationDate" class="control-label"></label>
                     <input asp-for="CreationDate" class="form-control" id="CreationDate">
                 </div>
+                <div class="form-group">
+                    <label asp-for="CoverImage" class="control-label"></label>
+                    <div class="custom-file">
+                        <input asp-for="CoverImage" class="custom-file-input" value="" id="BookImage">
+                        <label class="custom-file-label" for="BookImage">Choose Image</label>
+                    </div>
+                </div>
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
 </section>
+@section scripts{
+    <script type="text/javascript">
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+} 

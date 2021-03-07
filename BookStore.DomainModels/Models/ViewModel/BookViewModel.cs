@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -30,5 +31,10 @@ namespace BookStore.Models.ViewModel
         
         [DataType(DataType.DateTime)]
         public string CreationDate { get; set; }
+
+        [Required]
+        [DisplayName("Cover Image")]
+        [DataType(DataType.Upload)]
+        public IFormFile CoverImage { get; set; }
     }
 }
