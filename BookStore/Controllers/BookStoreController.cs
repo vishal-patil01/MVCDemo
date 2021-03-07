@@ -12,5 +12,13 @@ namespace BookStore.Controllers
         {
             return View();
         }
+        public IActionResult AddBook()
+        {
+            return View();
+        }
+        public IActionResult GetAllBook()
+        {
+            return View();
+        }
     }
 }
