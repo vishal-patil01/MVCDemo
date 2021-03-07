@@ -24,6 +24,7 @@ namespace BookStore.Controllers
             {
 
             }
+            ModelState.AddModelError("","Please fill form");
             return View();
         }
         public IActionResult GetAllBook()
