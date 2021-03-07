@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookStore.Models.ViewModel;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,15 @@ namespace BookStore.Controllers
         }
         public IActionResult AddBook()
         {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult AddBook(BookViewModel book)
+        {
+            if(ModelState.IsValid)
+            {
+
+            }
             return View();
         }
         public IActionResult GetAllBook()
