@@ -1,0 +1,11 @@
+﻿<section class="container">
+    <h2 class="text-center">Add Book</h2>
+    <div class="row mx-auto">
+        @for (int i = 0; i < 6; i++)
+        {
+            <div class="col-md-6 col-sm-12 col-lg-4 ">
+                <partial name="~/Views/Common/_CardView.cshtml" />
+            </div>
+        }
+    </div>
+</section>
