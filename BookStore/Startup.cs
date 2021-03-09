@@ -10,6 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using BookStore.DataAccessLayer.Interface;
+using BookStore.DataAccessLayer.Implementation;
+using BookStore.BussinessLayer.Implementation;
+using BookStore.BussinessLayer.Interface;
 
 namespace BookStore
 {
@@ -25,10 +29,12 @@ namespace BookStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BookstoreDBContext>(options => options.UseSqlServer("DESKTOP-EJ98MQC\\SQLEXPRESS;Initial Catalog=SingleSessionApp;Integrated Security=True"));
-            #if DEBUG
+            services.AddDbContext<BookstoreDBContext>(options => options.UseSqlServer("Data Source=DESKTOP-EJ98MQC\\SQLEXPRESS;Initial Catalog=BookStore;Integrated Security=True"));
+#if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            #endif
+#endif
+            services.AddTransient<IBookstoreRepository, BookstoreRepository>();
+            services.AddTransient<IBookstoreService, BookstoreService>();
             services.AddControllersWithViews();
         }
 

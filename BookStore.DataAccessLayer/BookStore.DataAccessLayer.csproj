@@ -8,9 +8,4 @@
     <ProjectReference Include="..\BookStore.DomainModels\BookStore.DomainModels.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implementation\" />
-    <Folder Include="Interface\" />
-  </ItemGroup>
-
 </Project>

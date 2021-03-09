@@ -32,7 +32,6 @@ namespace BookStore.Models.ViewModel
         [DataType(DataType.DateTime)]
         public string CreationDate { get; set; }
 
-        [Required]
         [DisplayName("Cover Image")]
         public string CoverImageUrl { get; set; }
 
