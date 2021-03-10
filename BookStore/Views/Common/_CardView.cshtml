@@ -5,7 +5,7 @@
         <h5 class="card-title">@Model.Title</h5>
         <b class="card-text">@Model.Author</b>
         <p class="card-text">@Model.Description</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a class="btn btn-primary" asp-controller="BookStore" asp-action="GetBookDetails" asp-route-id="@Model.Id">View Details </a>
     </div>
 </div>
 <br />

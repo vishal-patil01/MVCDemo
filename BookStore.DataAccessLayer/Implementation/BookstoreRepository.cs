@@ -29,5 +29,10 @@ namespace BookStore.DataAccessLayer.Implementation
         {
             return _bookstoreDBContext.Book.ToList();
         }
+
+        public async Task<Book> GetBookDetails(int id)
+        {
+           return _bookstoreDBContext.Book.Where(book => book.Id.Equals(id)).First();
+        }
     }
 }

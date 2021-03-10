@@ -34,13 +34,14 @@ namespace BookStore.BussinessLayer.Implementation
         public async Task<List<BookViewModel>> GetAllBook()
         {
             List<BookViewModel> bookList = new List<BookViewModel>();
-            List<Book> books =await _bookstoreRepository.GetAllBook();
+            List<Book> books = await _bookstoreRepository.GetAllBook();
             if (books.Count != 0)
             {
                 foreach (Book book in books)
                 {
                     bookList.Add(new BookViewModel()
                     {
+                        Id = book.Id,
                         Author = book.Author,
                         Title = book.Title,
                         CoverImageUrl = book.CoverImage,
@@ -50,6 +51,20 @@ namespace BookStore.BussinessLayer.Implementation
                 }
             }
             return bookList;
+        }
+
+        public async Task<BookViewModel> GetBookDetails(int id)
+        {
+            var book = await _bookstoreRepository.GetBookDetails(id);
+            return new BookViewModel()
+            {
+                Id = book.Id,
+                Author = book.Author,
+                Title = book.Title,
+                CoverImageUrl = book.CoverImage,
+                Description = book.Description,
+                NumberOfPages = book.NumberOfPages
+            };
         }
     }
 }
