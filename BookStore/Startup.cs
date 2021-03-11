@@ -14,6 +14,7 @@ using BookStore.DataAccessLayer.Interface;
 using BookStore.DataAccessLayer.Implementation;
 using BookStore.BussinessLayer.Implementation;
 using BookStore.BussinessLayer.Interface;
+using BookStore.DomainModels.Models.Constants;
 
 namespace BookStore
 {
@@ -33,6 +34,7 @@ namespace BookStore
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif
+            services.Configure<ConfigurationsProperties>(Configuration.GetSection("Configurations"));
             services.AddTransient<IBookstoreRepository, BookstoreRepository>();
             services.AddTransient<IBookstoreService, BookstoreService>();
             services.AddControllersWithViews();

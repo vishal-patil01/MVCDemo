@@ -19,10 +19,12 @@ namespace BookStore.Controllers
     {
         private readonly IWebHostEnvironment _environment;
         private readonly IBookstoreService _bookstoreService;
-        public BookStoreController(IWebHostEnvironment environment, IBookstoreService bookstoreService)
+        private readonly IOptions<ConfigurationsProperties> _configurationProperties;
+        public BookStoreController(IWebHostEnvironment environment, IBookstoreService bookstoreService, IOptions<ConfigurationsProperties> configurationProperties)
         {
             _environment = environment;
             _bookstoreService = bookstoreService;
+            _configurationProperties = configurationProperties;
         }
 
         public IActionResult Index()
@@ -43,30 +45,23 @@ namespace BookStore.Controllers
                     ModelState.AddModelError("", "Please Upload Only Image File");
                     return View();
                 }
-                book.CoverImageUrl = await UploadImages("Images/Covers/", book.CoverImage);
+                book.CoverImageUrl = await UploadImages(_configurationProperties.Value.CoverImagePath, book.CoverImage);
                 book.BookGallary_Images_URL = new List<BookImages>();
                 foreach (var bookgallary in book.BookGallary_Images)
                 {
                     var image = new BookImages()
                     {
                         BookId = book.Id,
-                        ImageUrl = await UploadImages("Images/Gallery/", bookgallary)
+                        ImageUrl = await UploadImages(_configurationProperties.Value.GalleryImagesPath, bookgallary)
                     };
                     book.BookGallary_Images_URL.Add(image);
                 }
                 await _bookstoreService.AddBook(book);
+                ModelState.Clear();
                 return View();
             }
             ModelState.AddModelError("", "Please fill form");
             return View();
-        }
-
-        private async Task<string> UploadImages(string path, IFormFile file)
-        {
-            var localPath = path + Guid.NewGuid().ToString() + file.FileName;
-            string imagesPath = Path.Combine(_environment.WebRootPath, localPath);
-            await file.CopyToAsync(new FileStream(imagesPath, FileMode.Create));
-            return "/" + localPath;
         }
 
         [HttpGet]
@@ -81,6 +76,13 @@ namespace BookStore.Controllers
         {
             var book = await _bookstoreService.GetBookDetails(id);
             return View(book);
+        }
+        private async Task<string> UploadImages(string path, IFormFile file)
+        {
+            var localPath = path + Guid.NewGuid().ToString() + file.FileName;
+            string imagesPath = Path.Combine(_environment.WebRootPath, localPath);
+            await file.CopyToAsync(new FileStream(imagesPath, FileMode.Create));
+            return "/" + localPath;
         }
     }
 }
