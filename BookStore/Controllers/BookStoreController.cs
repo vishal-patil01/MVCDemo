@@ -1,5 +1,6 @@
 ﻿using BookStore.BussinessLayer.Interface;
 using BookStore.DataAccessLayer.Interface;
+using BookStore.DomainModels.Models.Configurations;
 using BookStore.DomainModels.Models.Constants;
 using BookStore.DomainModels.Models.DBModels;
 using BookStore.Models.ViewModel;
@@ -19,12 +20,10 @@ namespace BookStore.Controllers
     {
         private readonly IWebHostEnvironment _environment;
         private readonly IBookstoreService _bookstoreService;
-        private readonly IOptions<ConfigurationsProperties> _configurationProperties;
-        public BookStoreController(IWebHostEnvironment environment, IBookstoreService bookstoreService, IOptions<ConfigurationsProperties> configurationProperties)
+        public BookStoreController(IWebHostEnvironment environment, IBookstoreService bookstoreService)
         {
             _environment = environment;
             _bookstoreService = bookstoreService;
-            _configurationProperties = configurationProperties;
         }
 
         public IActionResult Index()
@@ -45,14 +44,14 @@ namespace BookStore.Controllers
                     ModelState.AddModelError("", "Please Upload Only Image File");
                     return View();
                 }
-                book.CoverImageUrl = await UploadImages(_configurationProperties.Value.CoverImagePath, book.CoverImage);
+                book.CoverImageUrl = await UploadImages(ConfigurationManager.CoverImagePath, book.CoverImage);
                 book.BookGallary_Images_URL = new List<BookImages>();
                 foreach (var bookgallary in book.BookGallary_Images)
                 {
                     var image = new BookImages()
                     {
                         BookId = book.Id,
-                        ImageUrl = await UploadImages(_configurationProperties.Value.GalleryImagesPath, bookgallary)
+                        ImageUrl = await UploadImages(ConfigurationManager.CoverImagePath, bookgallary)
                     };
                     book.BookGallary_Images_URL.Add(image);
                 }
