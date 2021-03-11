@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BookStore.DomainModels.Models.DBModels;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,8 +36,13 @@ namespace BookStore.Models.ViewModel
         [DisplayName("Cover Image")]
         public string CoverImageUrl { get; set; }
 
+        [DisplayName("Book Gallery Image")]
+        public List<BookImages> BookGallary_Images_URL { get; set; }
+
         [DisplayName("Cover Image")]
         [DataType(DataType.Upload)]
         public IFormFile CoverImage { get; set; }
+
+        public IFormFileCollection BookGallary_Images { get; set; }
     }
 }

@@ -27,6 +27,7 @@ namespace BookStore.BussinessLayer.Implementation
                 CoverImage = bookViewModel.CoverImageUrl,
                 Description = bookViewModel.Description,
                 NumberOfPages = bookViewModel.NumberOfPages,
+                BookGallary_Images=bookViewModel.BookGallary_Images_URL
             };
             return await _bookstoreRepository.AddBook(book);
         }
@@ -55,16 +56,7 @@ namespace BookStore.BussinessLayer.Implementation
 
         public async Task<BookViewModel> GetBookDetails(int id)
         {
-            var book = await _bookstoreRepository.GetBookDetails(id);
-            return new BookViewModel()
-            {
-                Id = book.Id,
-                Author = book.Author,
-                Title = book.Title,
-                CoverImageUrl = book.CoverImage,
-                Description = book.Description,
-                NumberOfPages = book.NumberOfPages
-            };
+           return await _bookstoreRepository.GetBookDetails(id);
         }
     }
 }

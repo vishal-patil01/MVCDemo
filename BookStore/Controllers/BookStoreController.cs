@@ -1,8 +1,10 @@
 ﻿using BookStore.BussinessLayer.Interface;
 using BookStore.DataAccessLayer.Interface;
 using BookStore.DomainModels.Models.Constants;
+using BookStore.DomainModels.Models.DBModels;
 using BookStore.Models.ViewModel;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System;
@@ -41,9 +43,17 @@ namespace BookStore.Controllers
                     ModelState.AddModelError("", "Please Upload Only Image File");
                     return View();
                 }
-                string imagesPath = _environment.WebRootPath + "/Images/Covers/" + Guid.NewGuid().ToString() + book.CoverImage.FileName;
-                await book.CoverImage.CopyToAsync(new FileStream(imagesPath, FileMode.Create));
-                book.CoverImageUrl = imagesPath;
+                book.CoverImageUrl = await UploadImages("Images/Covers/", book.CoverImage);
+                book.BookGallary_Images_URL = new List<BookImages>();
+                foreach (var bookgallary in book.BookGallary_Images)
+                {
+                    var image = new BookImages()
+                    {
+                        BookId = book.Id,
+                        ImageUrl = await UploadImages("Images/Gallery/", bookgallary)
+                    };
+                    book.BookGallary_Images_URL.Add(image);
+                }
                 await _bookstoreService.AddBook(book);
                 return View();
             }
@@ -51,10 +61,18 @@ namespace BookStore.Controllers
             return View();
         }
 
+        private async Task<string> UploadImages(string path, IFormFile file)
+        {
+            var localPath = path + Guid.NewGuid().ToString() + file.FileName;
+            string imagesPath = Path.Combine(_environment.WebRootPath, localPath);
+            await file.CopyToAsync(new FileStream(imagesPath, FileMode.Create));
+            return "/" + localPath;
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllBook()
         {
-            var books= await _bookstoreService.GetAllBook();
+            var books = await _bookstoreService.GetAllBook();
             return View(books);
         }
 

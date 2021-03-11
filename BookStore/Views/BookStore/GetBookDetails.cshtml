@@ -4,15 +4,12 @@
         <div class="col-sm-12 col-md-6 col-lg-6 mx-auto">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" height="450" src="~/Images/Covers/book-covers-big-2019101610.jpg" alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" height="450" src="~/Images/Covers/cozy-mystery-book-covers.jpg" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" height="450" src="~/Images/Covers/The-book-of-chaos.jpg" alt="Third slide">
-                    </div>
+                    @for (int i = 0; i < @Model.BookGallary_Images_URL.Count(); i++)
+                    {
+                        <div class="carousel-item @(i==0?"active":"")">
+                            <img class="d-block w-100" height="450" src="@Model.BookGallary_Images_URL[i].ImageUrl" alt="@Model.BookGallary_Images_URL[i].BookId">
+                        </div>
+                    }
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -31,7 +28,7 @@
                 <p class="card-text"><b>Book Description : </b> @Model.Description </p>
                 <a class="btn btn-outline-primary" href="#">Read More </a>
             </div>
-            <br/>
+            <br />
             <table class="table table-bordered">
                 <tbody>
                     <tr>

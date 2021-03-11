@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BookStore.DomainModels.Models.DBModels;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,5 +37,6 @@ namespace BookStore.Models.DBModel
         [Required]
         [DisplayName("Cover Image")]
         public string CoverImage { get; set; }
+        public ICollection<BookImages> BookGallary_Images { get; set; }
     }
 }

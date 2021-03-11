@@ -11,7 +11,7 @@ namespace BookStore.DataAccessLayer.Interface
     {
         public Task<bool> AddBook(Book book);
         public Task<List<Book>> GetAllBook();
-        public Task<Book> GetBookDetails(int id);
+        public Task<BookViewModel> GetBookDetails(int id);
 
     }
 }

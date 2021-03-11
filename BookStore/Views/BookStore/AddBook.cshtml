@@ -35,6 +35,13 @@
                         <label class="custom-file-label" for="BookImage">Choose Image</label>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label asp-for="BookGallary_Images" class="control-label"></label>
+                    <div class="custom-file">
+                        <input asp-for="BookGallary_Images" class="custom-file-input" value="" id="BookImages">
+                        <label class="custom-file-label" for="BookImages">Choose Image</label>
+                    </div>
+                </div>
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
