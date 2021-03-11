@@ -17,6 +17,7 @@ using BookStore.BussinessLayer.Interface;
 using BookStore.DomainModels.Models.Constants;
 using BookStore.DomainModels.Models.Configurations;
 using Microsoft.Extensions.Options;
+using BookStore.Services;
 
 namespace BookStore
 {
@@ -36,10 +37,7 @@ namespace BookStore
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif
-            services.Configure<ConfigurationsProperties>(Configuration.GetSection("Configurations"));
-            ConfigurationManager._appConfig = services.BuildServiceProvider().GetService<IOptions<ConfigurationsProperties>>();
-            services.AddTransient<IBookstoreRepository, BookstoreRepository>();
-            services.AddTransient<IBookstoreService, BookstoreService>();
+            services.SetupDependancy(Configuration);
             services.AddControllersWithViews();
         }
 
