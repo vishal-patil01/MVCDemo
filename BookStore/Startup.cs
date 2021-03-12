@@ -58,6 +58,7 @@ namespace BookStore
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCorsMiddleware();
 
             app.UseAuthorization();
 
