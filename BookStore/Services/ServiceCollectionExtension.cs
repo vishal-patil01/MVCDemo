@@ -5,6 +5,7 @@ using BookStore.DataAccessLayer.Interface;
 using BookStore.DomainModels.Models.Configurations;
 using BookStore.DomainModels.Models.Constants;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -23,6 +24,7 @@ namespace BookStore.Services
             ConfigurationManager._appConfig = services.BuildServiceProvider().GetService<IOptions<ConfigurationsProperties>>();
             services.AddTransient<IBookstoreRepository, BookstoreRepository>();
             services.AddTransient<IBookstoreService, BookstoreService>();
+            services.AddHttpContextAccessor();
             return services;
         }
     }
