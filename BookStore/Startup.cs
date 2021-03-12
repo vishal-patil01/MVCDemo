@@ -33,7 +33,7 @@ namespace BookStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BookstoreDBContext>(options => options.UseSqlServer("Data Source=DESKTOP-EJ98MQC\\SQLEXPRESS;Initial Catalog=BookStore;Integrated Security=True"));
+            services.AddDbContext<BookstoreDBContext>(options => options.UseSqlServer(ConfigurationManager.ConnectionString));
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif

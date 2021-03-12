@@ -10,6 +10,7 @@ namespace BookStore.DomainModels.Models.Configurations
     {
         public static IOptions<ConfigurationsProperties> _appConfig { get; set; }
 
+        public static string ConnectionString { get { return _appConfig.Value.ConnectionString; } }
         public static string CoverImagePath { get { return _appConfig.Value.CoverImagePath; } }
         public static string GalleryImagesPath { get { return _appConfig.Value.GalleryImagesPath; } }
     }
