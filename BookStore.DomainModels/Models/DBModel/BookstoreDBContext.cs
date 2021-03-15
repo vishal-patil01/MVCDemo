@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BookStore.DomainModels.Models.DBModel;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,6 @@ namespace BookStore.Models.DBModel
         {
         }
         public DbSet<Book> Book { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }
