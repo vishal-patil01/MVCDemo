@@ -3,6 +3,7 @@ using BookStore.DataAccessLayer.Interface;
 using BookStore.DomainModels.Models.Configurations;
 using BookStore.DomainModels.Models.Constants;
 using BookStore.DomainModels.Models.DBModels;
+using BookStore.DomainModels.Models.ViewModel;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,15 @@ namespace BookStore.Controllers
         [HttpGet]
         [Route("[Controller]/Login")]
         public IActionResult Login() => View();
+
+        [HttpPost]
+        [Route("[Controller]/")]
+        [Route("[Controller]/SignUp")]
+        public IActionResult Login(SignupViewModel signupModel)
+        {
+
+            return View();
+        }
 
         [HttpGet]
         [Route("[Controller]/")]

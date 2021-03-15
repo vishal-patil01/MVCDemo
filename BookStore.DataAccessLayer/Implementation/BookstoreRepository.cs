@@ -22,7 +22,7 @@ namespace BookStore.DataAccessLayer.Implementation
         {
             await _bookstoreDBContext.AddAsync(book);
             int rowCount = await _bookstoreDBContext.SaveChangesAsync();
-            return (rowCount != 0) ? true : false;
+            return (rowCount != 0);
         }
 
         public async Task<List<Book>> GetAllBook()

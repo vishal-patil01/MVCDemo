@@ -11,7 +11,6 @@ namespace BookStore.Models.DBModel
 {
     public class Book
     {
-
         public int Id { get; set; }
 
         [DataType(DataType.Text)]
