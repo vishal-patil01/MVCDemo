@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookStore.Models.ViewModel
+namespace BookStore.DomainModels.Models.ViewModel
 {
     public class BookViewModel
     {

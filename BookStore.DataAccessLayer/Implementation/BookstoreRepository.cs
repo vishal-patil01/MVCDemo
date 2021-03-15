@@ -1,8 +1,7 @@
 ﻿using BookStore.DataAccessLayer.Interface;
 using BookStore.DomainModels.Models.DBModels;
+using BookStore.DomainModels.Models.ViewModel;
 using BookStore.Models.DBModel;
-using BookStore.Models.ViewModel;
-using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,7 +1,7 @@
 ﻿using BookStore.BussinessLayer.Interface;
 using BookStore.DataAccessLayer.Interface;
+using BookStore.DomainModels.Models.ViewModel;
 using BookStore.Models.DBModel;
-using BookStore.Models.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Text;

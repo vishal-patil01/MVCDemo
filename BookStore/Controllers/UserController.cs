@@ -3,7 +3,6 @@ using BookStore.DataAccessLayer.Interface;
 using BookStore.DomainModels.Models.Configurations;
 using BookStore.DomainModels.Models.Constants;
 using BookStore.DomainModels.Models.DBModels;
-using BookStore.Models.ViewModel;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,0 +1,33 @@
+﻿@model SignupViewModel
+<section class="container">
+    <h2 class="text-center">Registration</h2>
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <form asp-controller="User" asp-action="SignUp" method="post">
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" id="Title">
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" id="Title">
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div> <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" id="Title">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" id="Author">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>
+@section scripts{
+} 

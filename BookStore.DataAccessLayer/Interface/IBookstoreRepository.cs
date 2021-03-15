@@ -1,5 +1,5 @@
-﻿using BookStore.Models.DBModel;
-using BookStore.Models.ViewModel;
+﻿using BookStore.DomainModels.Models.ViewModel;
+using BookStore.Models.DBModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
