@@ -60,8 +60,6 @@ namespace BookStore
             app.UseRouting();
             app.UseCorsMiddleware();
 
-            app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

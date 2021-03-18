@@ -24,6 +24,8 @@ namespace BookStore.Services
             ConfigurationManager._appConfig = services.BuildServiceProvider().GetService<IOptions<ConfigurationsProperties>>();
             services.AddTransient<IBookstoreRepository, BookstoreRepository>();
             services.AddTransient<IBookstoreService, BookstoreService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IUserRepository, UserRepository>();
             services.AddHttpContextAccessor();
             return services;
         }

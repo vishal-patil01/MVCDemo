@@ -10,7 +10,7 @@ namespace BookStore.DataAccessLayer.Interface
 {
     public interface IUserRepository
     {
-        public Task<User> Login(User user);
+        public User Login(User user);
         public Task<bool> Register(User user);
 
     }

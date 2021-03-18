@@ -19,11 +19,9 @@ namespace BookStore.DataAccessLayer.Implementation
             _bookstoreDBContext = bookstoreDBContext;
         }
 
-        public async Task<User> Login(User user)
+        public User Login(User user)
         {
-          return _bookstoreDBContext.User
-                .Where(users=>users.Email.Equals(users.Email) && users.Password.Equals(users.Password))
-                .FirstOrDefault();
+            return _bookstoreDBContext.User.Where(users => users.Email == user.Email && users.Password == user.Password).FirstOrDefault();
         }
 
         public async Task<bool> Register(User user)
