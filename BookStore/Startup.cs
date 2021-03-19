@@ -38,6 +38,8 @@ namespace BookStore
             .AddCookie(options =>
             {
                 options.LoginPath = "/User/LogIn";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                options.SlidingExpiration = true;
             });
             services.AddDbContext<BookstoreDBContext>(options => options.UseSqlServer(ConfigurationManager.ConnectionString));
 #if DEBUG

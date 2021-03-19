@@ -34,17 +34,27 @@ namespace BookStore.Controllers
 
         [HttpPost]
         [Route("[Controller]/Login")]
-        public IActionResult Login(LoginViewModel signinModel)
+        public async Task<IActionResult> Login(LoginViewModel signinModel)
         {
             if (ModelState.IsValid)
             {
-                var isValid = UserService.Login(signinModel);
-                if (isValid != null)
+                var user = UserService.Login(signinModel);
+                if (user != null)
                 {
+                    var claimIdenties = new ClaimsIdentity("Custom");
+                    var claimPrincipal = new ClaimsPrincipal(claimIdenties);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,claimPrincipal,
+                        new AuthenticationProperties()
+                        {
+                            ExpiresUtc = DateTime.UtcNow.AddMinutes(20),
+                            IsPersistent = true,
+                            AllowRefresh = true
+                        });
                     return RedirectToAction("GetAllBook", "BookStore");
                 }
-                return RedirectToAction("Login");
+                ModelState.AddModelError("", "Invalid Credentials");
             }
+
             return View();
         }
 
