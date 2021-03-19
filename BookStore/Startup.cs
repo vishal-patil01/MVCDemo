@@ -18,6 +18,7 @@ using BookStore.DomainModels.Models.Constants;
 using BookStore.DomainModels.Models.Configurations;
 using Microsoft.Extensions.Options;
 using BookStore.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BookStore
 {
@@ -33,6 +34,11 @@ namespace BookStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/User/LogIn";
+            });
             services.AddDbContext<BookstoreDBContext>(options => options.UseSqlServer(ConfigurationManager.ConnectionString));
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -59,6 +65,8 @@ namespace BookStore
 
             app.UseRouting();
             app.UseCorsMiddleware();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

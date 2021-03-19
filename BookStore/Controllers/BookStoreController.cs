@@ -4,6 +4,7 @@ using BookStore.DomainModels.Models.Configurations;
 using BookStore.DomainModels.Models.Constants;
 using BookStore.DomainModels.Models.DBModels;
 using BookStore.DomainModels.Models.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,10 +31,14 @@ namespace BookStore.Controllers
         {
             return View();
         }
+
+        [Authorize]
         public IActionResult AddBook()
         {
             return View();
         }
+
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddBook(BookViewModel book)
         {
@@ -64,6 +69,7 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetAllBook()
         {
             var books = await _bookstoreService.GetAllBook();
@@ -71,6 +77,7 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetBookDetails(int id)
         {
             var book = await _bookstoreService.GetBookDetails(id);
