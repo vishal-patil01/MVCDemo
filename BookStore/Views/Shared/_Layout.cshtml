@@ -40,7 +40,7 @@
                 else
                 {
                     <div class="nav-item dropdown">
-                       <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hello User</a>
+                       <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Hello @User?.FindFirst("UserName").Value</a>
                       <div class="dropdown-menu">
                         <a class="nav-link dropdown-item" asp-controller="User" asp-action="SignOut">Logout</a>
                       </div>

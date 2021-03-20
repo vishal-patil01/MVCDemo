@@ -41,7 +41,13 @@ namespace BookStore.Controllers
                 var user = UserService.Login(signinModel);
                 if (user != null)
                 {
-                    var claimIdenties = new ClaimsIdentity("Custom");
+                    var userclaim = new List<Claim>
+                    {
+                    new Claim("UserId",user.ID.ToString()),
+                    new Claim("UserName",user.FirstName+" "+user.LastName),
+                    new Claim("UserEmail",user.Email)
+                    };
+                    var claimIdenties = new ClaimsIdentity(userclaim,CookieAuthenticationDefaults.AuthenticationScheme);
                     var claimPrincipal = new ClaimsPrincipal(claimIdenties);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal,
                         new AuthenticationProperties()
