@@ -43,7 +43,7 @@ namespace BookStore.Controllers
                 {
                     var claimIdenties = new ClaimsIdentity("Custom");
                     var claimPrincipal = new ClaimsPrincipal(claimIdenties);
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,claimPrincipal,
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal,
                         new AuthenticationProperties()
                         {
                             ExpiresUtc = DateTime.UtcNow.AddMinutes(20),
@@ -75,6 +75,21 @@ namespace BookStore.Controllers
                     return RedirectToAction("Login");
             }
             return View();
+        }
+
+        [HttpGet]
+        [Route("[Controller]/SignOut")]
+        public async Task<IActionResult> SignOut(LoginViewModel signinModel)
+        {
+
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme,
+                new AuthenticationProperties()
+                {
+                    ExpiresUtc = DateTime.UtcNow.AddMinutes(20),
+                    IsPersistent = true,
+                    AllowRefresh = true
+                });
+            return RedirectToAction("GetAllBook", "BookStore");
         }
     }
 }
