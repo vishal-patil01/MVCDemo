@@ -40,5 +40,9 @@ namespace BookStore.BussinessLayer.Implementation
             };
             return await _userRepository.Register(user);
         }
+        public async Task<bool> IsEmailExist(string email)
+        {
+            return await _userRepository.IsEmailExist(email)==null;
+        }
     }
 }
