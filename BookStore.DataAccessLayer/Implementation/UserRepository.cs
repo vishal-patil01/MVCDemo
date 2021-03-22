@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.DataAccessLayer.Implementation
 {
@@ -29,6 +30,11 @@ namespace BookStore.DataAccessLayer.Implementation
             await _bookstoreDBContext.AddAsync(user);
             var rowCount = await _bookstoreDBContext.SaveChangesAsync();
             return (rowCount != 0);
+        }
+
+        public async Task<User> IsEmailExist(string email)
+        {
+            return await _bookstoreDBContext.User.Where(users => users.Email == email).FirstOrDefaultAsync();
         }
     }
 }

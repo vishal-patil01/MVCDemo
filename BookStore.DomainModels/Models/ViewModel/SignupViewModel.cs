@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -17,6 +18,7 @@ namespace BookStore.DomainModels.Models.ViewModel
 
         [DataType(DataType.EmailAddress)]
         [Required]
+        [Remote(action: "CheckEmailExists", controller:"User")]
         public string Email { get; set; }
 
         [DataType(DataType.Password)]

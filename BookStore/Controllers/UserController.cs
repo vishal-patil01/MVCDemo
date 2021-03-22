@@ -6,6 +6,7 @@ using BookStore.DomainModels.Models.DBModels;
 using BookStore.DomainModels.Models.ViewModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -47,7 +48,7 @@ namespace BookStore.Controllers
                     new Claim("UserName",user.FirstName+" "+user.LastName),
                     new Claim("UserEmail",user.Email)
                     };
-                    var claimIdenties = new ClaimsIdentity(userclaim,CookieAuthenticationDefaults.AuthenticationScheme);
+                    var claimIdenties = new ClaimsIdentity(userclaim, CookieAuthenticationDefaults.AuthenticationScheme);
                     var claimPrincipal = new ClaimsPrincipal(claimIdenties);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal,
                         new AuthenticationProperties()
@@ -96,6 +97,18 @@ namespace BookStore.Controllers
                     AllowRefresh = true
                 });
             return RedirectToAction("GetAllBook", "BookStore");
+        }
+
+        [AllowAnonymous]
+        [AcceptVerbs("Get","Post")]
+        public async Task<IActionResult> CheckEmailExists(string email)
+        {
+            var isExist = await UserService.IsEmailExist(email);
+            if (isExist)
+            {
+                return Json(true);
+            }
+            return Json($"{email} Is Already Exists.");
         }
     }
 }
