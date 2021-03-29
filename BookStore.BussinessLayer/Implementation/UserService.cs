@@ -41,6 +41,10 @@ namespace BookStore.BussinessLayer.Implementation
             return await _userRepository.Register(user, signupViewModel.Role);
         }
 
+        public async Task<User_Roles> GetUserRole(User user)
+        {
+            return await _userRepository.GetUserRole(user);
+        }
         public async Task<List<Roles>> GetRoles()
         {
             return await _userRepository.GetRoles();

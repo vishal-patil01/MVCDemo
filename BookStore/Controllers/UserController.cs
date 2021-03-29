@@ -40,13 +40,15 @@ namespace BookStore.Controllers
             if (ModelState.IsValid)
             {
                 var user = UserService.Login(signinModel);
+                var role =await UserService.GetUserRole(user);
                 if (user != null)
                 {
                     var userclaim = new List<Claim>
                     {
                     new Claim("UserId",user.ID.ToString()),
                     new Claim("UserName",user.FirstName+" "+user.LastName),
-                    new Claim("UserEmail",user.Email)
+                    new Claim(ClaimTypes.Email,user.Email),
+                    new Claim(ClaimTypes.Role,role.RoleId.RoleName.ToString())
                     };
                     var claimIdenties = new ClaimsIdentity(userclaim, CookieAuthenticationDefaults.AuthenticationScheme);
                     var claimPrincipal = new ClaimsPrincipal(claimIdenties);

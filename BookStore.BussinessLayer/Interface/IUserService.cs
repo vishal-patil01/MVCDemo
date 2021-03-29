@@ -14,5 +14,6 @@ namespace BookStore.BussinessLayer.Interface
         public Task<bool> Register(SignupViewModel signupViewModel);
         public Task<bool> IsEmailExist(string email);
         public Task<List<Roles>> GetRoles();
+        public Task<User_Roles> GetUserRole(User user);
     }
 }

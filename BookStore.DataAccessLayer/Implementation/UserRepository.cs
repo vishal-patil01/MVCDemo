@@ -25,6 +25,16 @@ namespace BookStore.DataAccessLayer.Implementation
             return _bookstoreDBContext.User.Where(users => users.Email == user.Email && users.Password == user.Password).FirstOrDefault();
         }
 
+        public async Task<User_Roles> GetUserRole(User user)
+        {
+            return await _bookstoreDBContext.User_Roles.Where(ur => ur.UserId == user)
+                .Select(ur => new User_Roles()
+                {
+                    UserId = ur.UserId,
+                    RoleId = ur.RoleId
+                }).FirstOrDefaultAsync();
+        }
+
         public async Task<bool> Register(User user, Roles role)
         {
             int rowCount = 0;

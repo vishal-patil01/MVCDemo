@@ -14,5 +14,6 @@ namespace BookStore.DataAccessLayer.Interface
         public Task<bool> Register(User user,Roles role);
         public Task<User> IsEmailExist(string email);
         public Task<List<Roles>> GetRoles();
+        public Task<User_Roles> GetUserRole(User user);
     }
 }
