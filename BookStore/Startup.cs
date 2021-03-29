@@ -42,6 +42,12 @@ namespace BookStore
                 options.SlidingExpiration = true;
                 options.AccessDeniedPath = "/User/AccessDenied";
             });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(UserType.Admin, policy => policy.Requirements.Add(new PermissionRequirement(UserType.Admin)));
+                options.AddPolicy(UserType.User, policy => policy.Requirements.Add(new PermissionRequirement(UserType.User)));
+            });
+
             services.AddDbContext<BookstoreDBContext>(options => options.UseSqlServer(ConfigurationManager.ConnectionString));
 #if DEBUG
             services.AddRazorPages().AddRazorRuntimeCompilation();

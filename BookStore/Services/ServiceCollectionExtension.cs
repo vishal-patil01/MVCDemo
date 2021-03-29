@@ -4,6 +4,7 @@ using BookStore.DataAccessLayer.Implementation;
 using BookStore.DataAccessLayer.Interface;
 using BookStore.DomainModels.Models.Configurations;
 using BookStore.DomainModels.Models.Constants;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,7 @@ namespace BookStore.Services
             services.AddTransient<IBookstoreService, BookstoreService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddSingleton<IAuthorizationHandler, CustomAuthorizationHandler>();
             services.AddHttpContextAccessor();
             return services;
         }

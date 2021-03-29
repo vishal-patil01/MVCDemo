@@ -32,13 +32,13 @@ namespace BookStore.Controllers
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy = UserType.Admin)]
         public IActionResult AddBook()
         {
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Policy =UserType.Admin)]
         [HttpPost]
         public async Task<IActionResult> AddBook(BookViewModel book)
         {
@@ -69,7 +69,7 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Policy = UserType.User)]
         public async Task<IActionResult> GetAllBook()
         {
             var books = await _bookstoreService.GetAllBook();
@@ -77,7 +77,7 @@ namespace BookStore.Controllers
         }
 
         [HttpGet]
-        [Authorize]
+        [Authorize(Policy = UserType.User)]
         public async Task<IActionResult> GetBookDetails(int id)
         {
             var book = await _bookstoreService.GetBookDetails(id);
