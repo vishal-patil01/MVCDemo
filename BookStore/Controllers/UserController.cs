@@ -68,7 +68,10 @@ namespace BookStore.Controllers
         [HttpGet]
         [Route("[Controller]/")]
         [Route("[Controller]/SignUp")]
-        public IActionResult SignUp() => View();
+        public async Task<IActionResult> SignUp() {
+            ViewBag.Roles =  await UserService.GetRoles();
+            return View();
+        } 
 
         [HttpPost]
         [Route("[Controller]/")]

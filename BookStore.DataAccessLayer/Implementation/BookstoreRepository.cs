@@ -41,13 +41,13 @@ namespace BookStore.DataAccessLayer.Implementation
                      CoverImageUrl = book.CoverImage,
                      Description = book.Description,
                      NumberOfPages = book.NumberOfPages,
-                     BookGallary_Images_URL=book.BookGallary_Images.Select(images=>new BookImages()
+                     BookGallary_Images_URL = book.BookGallary_Images.Select(images => new BookImages()
                      {
-                         Id=images.Id,
-                         BookId=images.BookId,
-                         ImageUrl=images.ImageUrl
+                         Id = images.Id,
+                         BookId = images.BookId,
+                         ImageUrl = images.ImageUrl
                      }).ToList()
-                     
+
                  }).FirstOrDefault();
         }
     }

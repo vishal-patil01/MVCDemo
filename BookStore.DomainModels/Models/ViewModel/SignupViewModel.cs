@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookStore.DomainModels.Models.DBModel;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,5 +25,7 @@ namespace BookStore.DomainModels.Models.ViewModel
         [DataType(DataType.Password)]
         [Required]
         public string Password { get; set; }
+
+        public Roles Role { get; set; }
     }
 }

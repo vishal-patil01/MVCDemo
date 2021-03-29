@@ -38,11 +38,17 @@ namespace BookStore.BussinessLayer.Implementation
                 Email = signupViewModel.Email,
                 Password = signupViewModel.Password
             };
-            return await _userRepository.Register(user);
+            return await _userRepository.Register(user, signupViewModel.Role);
         }
+
+        public async Task<List<Roles>> GetRoles()
+        {
+            return await _userRepository.GetRoles();
+        }
+
         public async Task<bool> IsEmailExist(string email)
         {
-            return await _userRepository.IsEmailExist(email)==null;
+            return await _userRepository.IsEmailExist(email) == null;
         }
     }
 }

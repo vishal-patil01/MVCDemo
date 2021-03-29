@@ -25,11 +25,27 @@ namespace BookStore.DataAccessLayer.Implementation
             return _bookstoreDBContext.User.Where(users => users.Email == user.Email && users.Password == user.Password).FirstOrDefault();
         }
 
-        public async Task<bool> Register(User user)
+        public async Task<bool> Register(User user, Roles role)
         {
-            await _bookstoreDBContext.AddAsync(user);
-            var rowCount = await _bookstoreDBContext.SaveChangesAsync();
-            return (rowCount != 0);
+            int rowCount = 0;
+            using (var dbContext = _bookstoreDBContext)
+            {
+                var registerdUser = await dbContext.AddAsync(user);
+                var registerdRole = await dbContext.Roles.FindAsync(role.Id);
+                await dbContext.SaveChangesAsync();
+                var user_roles = new User_Roles()
+                {
+                    UserId = user,
+                    RoleId = registerdRole,
+                };
+                await dbContext.AddAsync(user_roles);
+                rowCount = await dbContext.SaveChangesAsync();
+            }
+            return (rowCount > 0);
+        }
+        public async Task<List<Roles>> GetRoles()
+        {
+            return await _bookstoreDBContext.Roles.ToListAsync();
         }
 
         public async Task<User> IsEmailExist(string email)

@@ -1,4 +1,5 @@
-﻿using BookStore.DomainModels.Models.DBModel;
+﻿using BookStore.DomainModels.Models.Constants;
+using BookStore.DomainModels.Models.DBModel;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,22 @@ namespace BookStore.Models.DBModel
         }
         public DbSet<Book> Book { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<Roles> Roles { get; set; }
+        public DbSet<User_Roles> User_Roles { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Roles>().HasData(
+                new Roles
+                {
+                    Id=1,
+                    RoleName = RolesEnum.Admin
+                },
+                 new Roles
+                 {
+                     Id=2,
+                     RoleName = RolesEnum.User
+                 }
+            );
+        }
     }
 }
