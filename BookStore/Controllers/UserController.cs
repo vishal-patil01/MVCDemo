@@ -115,5 +115,9 @@ namespace BookStore.Controllers
             }
             return Json($"{email} Is Already Exists.");
         }
+
+        [HttpGet]
+        [Route("[Controller]/AccessDenied")]
+        public IActionResult AccessDenied() => View();
     }
 }
