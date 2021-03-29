@@ -2,6 +2,7 @@
 using BookStore.DomainModels.Models.DBModels;
 using BookStore.DomainModels.Models.ViewModel;
 using BookStore.Models.DBModel;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +28,12 @@ namespace BookStore.DataAccessLayer.Implementation
 
         public async Task<List<Book>> GetAllBook()
         {
-            return _bookstoreDBContext.Book.ToList();
+            return await _bookstoreDBContext.Book.ToListAsync();
         }
 
         public async Task<BookViewModel> GetBookDetails(int id)
         {
-            return _bookstoreDBContext.Book.Where(book => book.Id.Equals(id))
+            return await _bookstoreDBContext.Book.Where(book => book.Id.Equals(id))
                  .Select(book => new BookViewModel()
                  {
                      Id = book.Id,
@@ -48,7 +49,7 @@ namespace BookStore.DataAccessLayer.Implementation
                          ImageUrl = images.ImageUrl
                      }).ToList()
 
-                 }).FirstOrDefault();
+                 }).FirstOrDefaultAsync();
         }
     }
 }

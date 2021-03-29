@@ -19,14 +19,14 @@ namespace BookStore.BussinessLayer.Implementation
             _userRepository = userRepository;
         }
 
-        public User Login(LoginViewModel loginViewModel)
+        public async Task<User> Login(LoginViewModel loginViewModel)
         {
             User user = new User()
             {
                 Email = loginViewModel.Email,
                 Password = loginViewModel.Password
             };
-            return _userRepository.Login(user);
+            return await _userRepository.Login(user);
         }
 
         public async Task<bool> Register(SignupViewModel signupViewModel)

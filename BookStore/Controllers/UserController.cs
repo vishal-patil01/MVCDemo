@@ -39,7 +39,7 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = UserService.Login(signinModel);
+                var user = await UserService.Login(signinModel);
                 var role =await UserService.GetUserRole(user);
                 if (user != null)
                 {
